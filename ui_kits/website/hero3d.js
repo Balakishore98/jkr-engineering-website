@@ -36,23 +36,91 @@
     const steelMat = new THREE.MeshStandardMaterial({ color: 0x9aa6b3, metalness: 0.95, roughness: 0.22 });
     const darkMat = new THREE.MeshStandardMaterial({ color: 0x2b3542, metalness: 0.85, roughness: 0.32 });
     const accentMat = new THREE.MeshStandardMaterial({ color: 0x7f0606, metalness: 0.55, roughness: 0.3, emissive: 0x7f0606, emissiveIntensity: 0.55 });
+    const goldMat = new THREE.MeshStandardMaterial({ color: 0xb8862e, metalness: 0.85, roughness: 0.3 });
 
     const objects = [];
-    function addMesh(geo, mat, pos) {
-      const m = new THREE.Mesh(geo, mat);
-      m.position.set(pos[0], pos[1], pos[2]);
-      m.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, 0);
-      group.add(m);
-      objects.push(m);
+    function place(mesh, pos, rot) {
+      mesh.position.set(pos[0], pos[1], pos[2]);
+      if (rot) mesh.rotation.set(rot[0], rot[1], rot[2]);
+      group.add(mesh);
+      objects.push(mesh);
+      return mesh;
     }
 
-    addMesh(new THREE.TorusGeometry(1.15, 0.17, 32, 100), steelMat, [-1.5, 0.4, 0]);
-    addMesh(new THREE.TorusGeometry(0.6, 0.13, 32, 100), accentMat, [1.7, -0.6, 1]);
-    addMesh(new THREE.IcosahedronGeometry(0.7, 0), darkMat, [0.5, 1.2, -0.9]);
-    addMesh(new THREE.CylinderGeometry(0.22, 0.22, 1.7, 24), steelMat, [-0.5, -1.05, 0.7]);
-    addMesh(new THREE.OctahedronGeometry(0.5, 0), accentMat, [2.1, 0.9, -0.4]);
-    addMesh(new THREE.TorusKnotGeometry(0.5, 0.15, 100, 16), darkMat, [-2.1, -0.35, -0.7]);
-    addMesh(new THREE.DodecahedronGeometry(0.4, 0), steelMat, [0.2, -0.2, 1.6]);
+    // -- Milling cutter: shank + face-mill head ringed with carbide-insert teeth.
+    function makeMillingCutter() {
+      const g = new THREE.Group();
+      const shank = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.16, 1.0, 24), steelMat);
+      shank.position.y = 0.6;
+      g.add(shank);
+      const head = new THREE.Mesh(new THREE.CylinderGeometry(0.46, 0.46, 0.32, 32), darkMat);
+      g.add(head);
+      const teeth = 8;
+      for (let i = 0; i < teeth; i++) {
+        const a = (i / teeth) * Math.PI * 2;
+        const tooth = new THREE.Mesh(new THREE.BoxGeometry(0.13, 0.34, 0.09), goldMat);
+        tooth.position.set(Math.cos(a) * 0.47, 0, Math.sin(a) * 0.47);
+        tooth.rotation.y = a;
+        g.add(tooth);
+      }
+      return g;
+    }
+
+    // -- Drill bit: shank + conical tip + a helical flute traced with a thin tube.
+    function makeDrillBit() {
+      const g = new THREE.Group();
+      const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.15, 0.15, 1.3, 20), steelMat);
+      g.add(shaft);
+      const tip = new THREE.Mesh(new THREE.ConeGeometry(0.15, 0.34, 20), accentMat);
+      tip.position.y = -0.82;
+      g.add(tip);
+      const helixPts = [];
+      for (let i = 0; i <= 28; i++) {
+        const t = i / 28;
+        helixPts.push(new THREE.Vector3(Math.cos(t * Math.PI * 6) * 0.16, 0.62 - t * 1.3, Math.sin(t * Math.PI * 6) * 0.16));
+      }
+      const flute = new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(helixPts), 80, 0.02, 6, false), darkMat);
+      g.add(flute);
+      return g;
+    }
+
+    // -- Tool holder: BT-style taper, retention flange, collet nose.
+    function makeToolHolder() {
+      const g = new THREE.Group();
+      const taper = new THREE.Mesh(new THREE.CylinderGeometry(0.52, 0.22, 0.95, 28), steelMat);
+      g.add(taper);
+      const flange = new THREE.Mesh(new THREE.TorusGeometry(0.44, 0.055, 16, 32), accentMat);
+      flange.rotation.x = Math.PI / 2;
+      flange.position.y = 0.18;
+      g.add(flange);
+      const collet = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.16, 0.55, 20), darkMat);
+      collet.position.y = -0.72;
+      g.add(collet);
+      return g;
+    }
+
+    // -- Boring bar: long slender shaft with a square carbide insert near the tip.
+    function makeBoringBar() {
+      const g = new THREE.Group();
+      const shaft = new THREE.Mesh(new THREE.CylinderGeometry(0.13, 0.13, 1.9, 20), darkMat);
+      g.add(shaft);
+      const insert = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.07, 0.2), goldMat);
+      insert.position.set(0.15, 0.78, 0.05);
+      g.add(insert);
+      return g;
+    }
+
+    // -- Indexable insert: triangular carbide plate.
+    function makeInsert(mat) {
+      return new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.34, 0.07, 3), mat);
+    }
+
+    place(makeMillingCutter(), [-1.5, 0.3, 0], [0.3, 0, 0.5]);
+    place(makeDrillBit(), [1.7, -0.5, 1], [0, 0, 0.35]);
+    place(makeToolHolder(), [0.4, 1.2, -0.9], [0.5, 0.6, 0]);
+    place(makeBoringBar(), [-2.0, -0.6, -0.6], [0, 0, 1.1]);
+    place(makeInsert(accentMat), [2.0, 0.9, -0.3], [1.1, 0.4, 0]);
+    place(makeInsert(goldMat), [0.1, -0.3, 1.6], [0.6, 1.2, 0]);
 
     const particleCount = 260;
     const positions = new Float32Array(particleCount * 3);
