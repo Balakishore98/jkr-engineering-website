@@ -2,42 +2,29 @@
 const { Button: HeroButton, SectionLabel: HeroLabel, Badge: HeroBadge } = window.JKREngineeringDesignSystem_a889f1;
 
 function Hero({ onNav }) {
-  const imgWrapRef = React.useRef(null);
+  const canvasRef = React.useRef(null);
 
-  const onTilt = (e) => {
-    const el = imgWrapRef.current;
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    const px = (e.clientX - r.left) / r.width - 0.5;
-    const py = (e.clientY - r.top) / r.height - 0.5;
-    el.style.transform = `rotateY(${px * 18}deg) rotateX(${py * -18}deg) scale(1.03)`;
-  };
-  const onTiltLeave = () => {
-    if (imgWrapRef.current) imgWrapRef.current.style.transform = 'rotateY(0deg) rotateX(0deg)';
-  };
+  React.useEffect(() => {
+    let destroy = null;
+    window.JKRHero3D && window.JKRHero3D.whenReady(() => {
+      destroy = window.JKRHero3D.init(canvasRef.current);
+    });
+    return () => { destroy && destroy(); };
+  }, []);
 
   return (
-    <section id="top" style={{ background: 'var(--bg-dark)', position: 'relative', overflow: 'hidden' }}>
-      {/* faint blueprint grid, slow ambient drift */}
-      <div className="jkr-grid-drift" style={{
-        position: 'absolute', inset: 0, opacity: 0.5,
-        backgroundImage: 'linear-gradient(var(--steel-800) 1px, transparent 1px), linear-gradient(90deg, var(--steel-800) 1px, transparent 1px)',
-        backgroundSize: '48px 48px',
-        maskImage: 'radial-gradient(120% 90% at 70% 10%, #000 30%, transparent 80%)',
-        WebkitMaskImage: 'radial-gradient(120% 90% at 70% 10%, #000 30%, transparent 80%)',
-      }} />
-      {/* ambient amber glow behind the image */}
-      <div className="jkr-glow" style={{
-        position: 'absolute', top: '4%', right: '0%', width: 560, height: 560,
-        background: 'radial-gradient(circle, rgba(127,6,6,0.32), transparent 70%)',
-        filter: 'blur(14px)', pointerEvents: 'none',
+    <section id="top" style={{ background: 'var(--bg-dark)', position: 'relative', overflow: 'hidden', minHeight: 'clamp(560px, 92vh, 880px)', display: 'flex', alignItems: 'center' }}>
+      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }} />
+      {/* dark gradient so the left-aligned text stays legible over the 3D scene */}
+      <div style={{
+        position: 'absolute', inset: 0, pointerEvents: 'none',
+        background: 'linear-gradient(100deg, rgba(10,14,20,0.92) 0%, rgba(10,14,20,0.72) 38%, rgba(10,14,20,0.25) 68%, rgba(10,14,20,0.05) 100%)',
       }} />
       <div style={{
-        position: 'relative', maxWidth: 'var(--container)', margin: '0 auto',
-        padding: 'clamp(56px, 8vw, 104px) 32px', display: 'grid',
-        gridTemplateColumns: '1.05fr 0.95fr', gap: 48, alignItems: 'center',
+        position: 'relative', maxWidth: 'var(--container)', margin: '0 auto', width: '100%',
+        padding: 'clamp(56px, 8vw, 104px) 32px',
       }}>
-        <div data-reveal="left">
+        <div data-reveal="left" style={{ maxWidth: 640 }}>
           <HeroLabel tone="dark">CNC Manufacturing · Est. 2005</HeroLabel>
           <h1 style={{
             margin: '20px 0 0', fontFamily: 'var(--font-display)', fontWeight: 700,
@@ -63,30 +50,11 @@ function Hero({ onNav }) {
             <HeroButton className="jkr-shine-btn" variant="primary" size="lg" onClick={() => onNav && onNav('contact')}>Request a quote</HeroButton>
             <HeroButton variant="dark" size="lg" onClick={() => onNav && onNav('services')} iconRight={<span>→</span>}>What we do</HeroButton>
           </div>
-          <div style={{ display: 'flex', gap: 10, marginTop: 28 }}>
+          <div style={{ display: 'flex', gap: 10, marginTop: 28, flexWrap: 'wrap' }}>
             <HeroBadge variant="dark">±0.01 mm tolerance</HeroBadge>
             <HeroBadge variant="dark">Made to order</HeroBadge>
             <HeroBadge variant="dark">On-time delivery</HeroBadge>
-          </div>
-        </div>
-        <div data-reveal="right" data-reveal-delay="120" style={{ position: 'relative', perspective: 1000 }}>
-          <div
-            ref={imgWrapRef}
-            className="jkr-tilt jkr-img-zoom"
-            onMouseMove={onTilt}
-            onMouseLeave={onTiltLeave}
-            style={{ borderRadius: 'var(--radius-lg)', border: '1px solid var(--border-dark)', boxShadow: 'var(--shadow-lg)' }}
-          >
-            <img src="../../assets/tools-collage-overview.png" alt="Precision cutting tools manufactured by JKR Engineering"
-              style={{ width: '100%', height: 'auto', display: 'block', borderRadius: 'var(--radius-lg)' }} />
-          </div>
-          <div className="jkr-float" style={{
-            position: 'absolute', bottom: -14, left: -14, background: 'var(--accent)',
-            color: 'var(--accent-contrast)', padding: '10px 16px', borderRadius: 'var(--radius-sm)',
-            fontFamily: 'var(--font-mono)', fontSize: 12, letterSpacing: '0.1em', fontWeight: 600,
-            boxShadow: 'var(--shadow-accent)',
-          }}>
-            EST. MAY 2005
+            <HeroBadge variant="accent">Est. May 2005</HeroBadge>
           </div>
         </div>
       </div>
