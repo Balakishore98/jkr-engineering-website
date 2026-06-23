@@ -1,8 +1,43 @@
 /* JKR Engineering website — Contact (details + enquiry form) */
 const { Button: CtaButton, Input: CtaInput, Textarea: CtaTextarea, SectionLabel: CtaLabel } = window.JKREngineeringDesignSystem_a889f1;
 
+const ENQUIRY_EMAIL = 'jkrchidambaram@gmail.com';
+
 function Contact() {
   const [sent, setSent] = React.useState(false);
+  const [sending, setSending] = React.useState(false);
+  const [error, setError] = React.useState('');
+  const [form, setForm] = React.useState({ name: '', phone: '', company: '', message: '' });
+
+  const field = (key) => (e) => setForm((f) => ({ ...f, [key]: e.target.value }));
+
+  const submit = async (e) => {
+    e.preventDefault();
+    if (sending) return;
+    setSending(true);
+    setError('');
+    try {
+      const res = await fetch(`https://formsubmit.co/ajax/${ENQUIRY_EMAIL}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({
+          _subject: `New enquiry from ${form.name || 'website'} — JKR Engineering`,
+          _template: 'table',
+          Name: form.name,
+          Phone: form.phone,
+          Company: form.company || '—',
+          'What they need made': form.message,
+        }),
+      });
+      if (!res.ok) throw new Error('Request failed');
+      setSent(true);
+      setForm({ name: '', phone: '', company: '', message: '' });
+    } catch (err) {
+      setError("Couldn't send — please call 90923 54314 instead, or try again.");
+    } finally {
+      setSending(false);
+    }
+  };
 
   const detail = (label, value, href) => (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
@@ -45,14 +80,17 @@ function Contact() {
               <CtaButton variant="secondary" onClick={() => setSent(false)}>Send another</CtaButton>
             </div>
           ) : (
-            <form onSubmit={(e) => { e.preventDefault(); setSent(true); }} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <form onSubmit={submit} style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
-                <CtaInput label="Name" placeholder="Your name" required />
-                <CtaInput label="Phone" type="tel" placeholder="90923 54314" required />
+                <CtaInput label="Name" placeholder="Your name" value={form.name} onChange={field('name')} required />
+                <CtaInput label="Phone" type="tel" placeholder="90923 54314" value={form.phone} onChange={field('phone')} required />
               </div>
-              <CtaInput label="Company" placeholder="Company name" />
-              <CtaTextarea label="What do you need made?" rows={4} placeholder="Part, material, quantity, tolerances…" required />
-              <CtaButton className="jkr-shine-btn" variant="primary" size="lg" fullWidth onClick={(e) => { e.preventDefault(); setSent(true); }}>Send enquiry</CtaButton>
+              <CtaInput label="Company" placeholder="Company name" value={form.company} onChange={field('company')} />
+              <CtaTextarea label="What do you need made?" rows={4} placeholder="Part, material, quantity, tolerances…" value={form.message} onChange={field('message')} required />
+              {error && <p style={{ margin: 0, fontSize: 14, color: 'var(--red-500)' }}>{error}</p>}
+              <CtaButton className="jkr-shine-btn" type="submit" variant="primary" size="lg" fullWidth disabled={sending}>
+                {sending ? 'Sending…' : 'Send enquiry'}
+              </CtaButton>
             </form>
           )}
         </div>

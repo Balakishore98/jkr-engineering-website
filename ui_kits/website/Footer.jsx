@@ -17,7 +17,7 @@ function Footer({ onNav }) {
             display: 'inline-flex', alignItems: 'center', background: 'var(--steel-50)',
             borderRadius: 'var(--radius-sm)', padding: '8px 12px',
           }}>
-            <img src="../../assets/jkr-logo.png" alt="JKR Engineering" height="36" style={{ display: 'block' }} />
+            <img src="../../assets/jkr-logo.png" alt="JKR Engineering" height="56" style={{ display: 'block' }} />
           </div>
           <p style={{ margin: '16px 0 0', fontSize: 14, lineHeight: 1.6, color: 'var(--text-on-dark-faint)' }}>
             CNC machine tools and precision parts, manufactured to spec since 2005.

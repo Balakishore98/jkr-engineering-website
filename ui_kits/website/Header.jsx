@@ -39,11 +39,11 @@ function Header({ onNav }) {
       backdropFilter: 'blur(10px)', borderBottom: '1px solid var(--border)',
     }}>
       <div style={{
-        maxWidth: 'var(--container)', margin: '0 auto', padding: scrolled ? '10px 32px' : '14px 32px',
+        maxWidth: 'var(--container)', margin: '0 auto', padding: scrolled ? '8px 32px' : '12px 32px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
       }}>
         <a href="#top" onClick={(e) => { e.preventDefault(); onNav && onNav('top'); }} style={{ display: 'flex', alignItems: 'center', gap: 10, textDecoration: 'none' }}>
-          <img src="../../assets/jkr-logo.png" alt="JKR Engineering" height="44" style={{ display: 'block' }} />
+          <img src="../../assets/jkr-logo.png" alt="JKR Engineering" height={scrolled ? 56 : 68} style={{ display: 'block', transition: 'height 240ms var(--ease-out)' }} />
           <span style={{
             fontFamily: 'var(--font-mono)', fontSize: 10.5, letterSpacing: '0.12em',
             textTransform: 'uppercase', color: 'var(--text-muted)', lineHeight: 1.3, maxWidth: '11ch',
