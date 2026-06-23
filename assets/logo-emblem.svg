@@ -1,0 +1,8 @@
+<svg width="56" height="56" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="JKR Engineering emblem">
+  <rect width="56" height="56" rx="6" fill="#0a0e14"></rect>
+  <rect x="1" y="1" width="54" height="54" rx="5.5" fill="none" stroke="#2b3542" stroke-width="1"></rect>
+  
+  <path d="M7 7h6M7 7v6" stroke="#e08a16" stroke-width="2"></path>
+  <path d="M49 49h-6M49 49v-6" stroke="#e08a16" stroke-width="2"></path>
+  <text x="28" y="35" font-family="&#39;IBM Plex Sans Condensed&#39;,&#39;IBM Plex Sans&#39;,sans-serif" font-size="22" font-weight="700" letter-spacing="0.5" text-anchor="middle" fill="#f4f7f9">JKR</text>
+</svg>

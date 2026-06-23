@@ -1,0 +1,17 @@
+<!-- @dsCard group="Spacing" viewport="700x180" name="Shadows" subtitle="Crisp & low — technical, not glowy" -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; background: var(--bg-subtle); padding: 28px 24px; font-family: var(--font-mono); }
+  .row { display: flex; gap: 26px; }
+  .cell { text-align: center; }
+  .box { width: 96px; height: 56px; background: var(--surface-card); border-radius: var(--radius-md); }
+  .lab { font-size: 11px; color: var(--text-faint); margin-top: 12px; }
+</style></head><body>
+  <div class="row" id="s"></div>
+  <script>
+    const t = ['xs','sm','md','lg','accent'];
+    document.getElementById('s').innerHTML = t.map(k =>
+      `<div class="cell"><div class="box" style="box-shadow:var(--shadow-${k})"></div><div class="lab">--shadow-${k}</div></div>`).join('');
+  </script>
+</body></html>

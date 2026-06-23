@@ -1,0 +1,33 @@
+<!-- @dsCard group="Brand" viewport="700x260" name="Logo" subtitle="Emblem + lockup (placeholder mark — swap for final)" -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; font-family: var(--font-mono); }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; }
+  .cell { padding: 26px; display: flex; flex-direction: column; gap: 14px; align-items: flex-start; justify-content: center; min-height: 100px; }
+  .light { background: var(--surface-card); }
+  .dark { background: var(--bg-dark); }
+  .lab { font-size: 10px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-faint); }
+  .note { grid-column: 1 / -1; padding: 12px 26px; background: var(--accent-soft); color: var(--amber-700); font-size: 11px; letter-spacing: 0.04em; }
+  img { display: block; }
+</style></head><body>
+  <div class="grid">
+    <div class="cell light">
+      <img src="../../assets/logo-lockup.svg" alt="JKR Engineering lockup" height="48" />
+      <span class="lab">Lockup · on light</span>
+    </div>
+    <div class="cell dark">
+      <img src="../../assets/logo-lockup-dark.svg" alt="JKR Engineering lockup dark" height="48" />
+      <span class="lab" style="color:var(--text-on-dark-faint)">Lockup · on dark</span>
+    </div>
+    <div class="cell light">
+      <img src="../../assets/logo-emblem.svg" alt="JKR emblem" height="48" />
+      <span class="lab">Emblem · favicon / avatar</span>
+    </div>
+    <div class="cell dark">
+      <img src="../../assets/logo-emblem.svg" alt="JKR emblem" height="48" />
+      <span class="lab" style="color:var(--text-on-dark-faint)">Emblem · on dark</span>
+    </div>
+    <div class="note">Placeholder mark — replace assets/logo-*.svg with your final logo.</div>
+  </div>
+</body></html>

@@ -1,0 +1,76 @@
+<!-- @dsCard group="Website" viewport="1280x820" name="Marketing site — full page" subtitle="Hero, services, why, about, contact (interactive)" -->
+<!-- @startingPoint section="Website" subtitle="JKR one-page marketing site" viewport="1280x820" -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>JKR Engineering — CNC Machine Tools &amp; Precision Parts</title>
+<link rel="icon" href="../../assets/jkr-logo.png" />
+<link rel="stylesheet" href="../../styles.css" />
+<link rel="stylesheet" href="motion.css" />
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script src="../../_ds_bundle.js"></script>
+<script src="motion.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg-base); color: var(--text-body); font-family: var(--font-sans); }
+</style>
+</head>
+<body>
+<div class="jkr-progress-track"><div class="jkr-progress-bar"></div></div>
+<div id="root"></div>
+<script type="text/babel" src="Header.jsx"></script>
+<script type="text/babel" src="Hero.jsx"></script>
+<script type="text/babel" src="Services.jsx"></script>
+<script type="text/babel" src="Process.jsx"></script>
+<script type="text/babel" src="Capabilities.jsx"></script>
+<script type="text/babel" src="Materials.jsx"></script>
+<script type="text/babel" src="WhyUs.jsx"></script>
+<script type="text/babel" src="About.jsx"></script>
+<script type="text/babel" src="Contact.jsx"></script>
+<script type="text/babel" src="Footer.jsx"></script>
+<script type="text/babel" data-presets="react">
+  function App() {
+    const onNav = (id) => {
+      if (id === 'top') { window.scrollTo({ top: 0, behavior: 'smooth' }); return; }
+      const el = document.getElementById(id);
+      if (el) window.scrollTo({ top: el.offsetTop - 60, behavior: 'smooth' });
+    };
+    React.useEffect(() => {
+      if (window.JKRMotion) {
+        window.JKRMotion.initReveal();
+        window.JKRMotion.initCountUp();
+        window.JKRMotion.initProgressBar();
+      }
+    }, []);
+    return (
+      <React.Fragment>
+        <Header onNav={onNav} />
+        <Hero onNav={onNav} />
+        <Services />
+        <Process />
+        <Capabilities />
+        <Materials />
+        <WhyUs />
+        <About />
+        <Contact />
+        <Footer onNav={onNav} />
+      </React.Fragment>
+    );
+  }
+  // Wait for babel-loaded section scripts (window.Header etc.) to be ready.
+  function mount() {
+    if (window.Header && window.Hero && window.Services && window.Process && window.Capabilities && window.Materials && window.WhyUs && window.About && window.Contact && window.Footer) {
+      ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+    } else {
+      setTimeout(mount, 30);
+    }
+  }
+  mount();
+</script>
+</body>
+</html>

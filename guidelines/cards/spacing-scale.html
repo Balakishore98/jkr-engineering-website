@@ -1,0 +1,17 @@
+<!-- @dsCard group="Spacing" viewport="700x180" name="Spacing Scale" subtitle="4px base — 1 through 10" -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; background: var(--surface-card); padding: 22px 24px; font-family: var(--font-mono); }
+  .row { display: flex; align-items: center; gap: 14px; margin-bottom: 9px; }
+  .bar { background: var(--accent); height: 14px; border-radius: var(--radius-xs); }
+  .tok { font-size: 11px; color: var(--text-muted); width: 90px; }
+  .px { font-size: 11px; color: var(--text-faint); }
+</style></head><body>
+  <div id="s"></div>
+  <script>
+    const t = [['--space-2',8],['--space-3',12],['--space-4',16],['--space-5',24],['--space-6',32],['--space-7',48],['--space-8',64]];
+    document.getElementById('s').innerHTML = t.map(([n,px]) =>
+      `<div class="row"><span class="tok">${n}</span><span class="bar" style="width:${px}px"></span><span class="px">${px}px</span></div>`).join('');
+  </script>
+</body></html>

@@ -1,0 +1,17 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Steel Neutrals" subtitle="The metal — cool grays from 950 to 50" -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; background: var(--surface-card); padding: 22px 24px; font-family: var(--font-mono); }
+  .scale { display: grid; grid-template-columns: repeat(12, 1fr); gap: 6px; }
+  .sw { height: 56px; border-radius: var(--radius-sm); border: 1px solid var(--hairline); }
+  .lab { font-size: 10px; letter-spacing: 0.06em; color: var(--text-faint); margin-top: 6px; text-align: center; }
+  .cell { display: flex; flex-direction: column; }
+</style></head><body>
+  <div class="scale" id="s"></div>
+  <script>
+    const steps = [950,900,850,800,700,600,500,400,300,200,100,50];
+    document.getElementById('s').innerHTML = steps.map(n =>
+      `<div class="cell"><div class="sw" style="background:var(--steel-${n})"></div><div class="lab">${n}</div></div>`).join('');
+  </script>
+</body></html>

@@ -1,0 +1,108 @@
+/* JKR Engineering website — motion layer.
+   Scroll reveals, count-up support, hover/parallax polish.
+   Turned up deliberately: bigger travel, overshoot easing, stronger loops —
+   "exaggerated" motion was an explicit ask, layered on top of the calmer
+   per-component defaults in tokens/spacing.css. */
+
+@media (prefers-reduced-motion: no-preference) {
+
+  :root { --jkr-overshoot: cubic-bezier(0.22, 1.4, 0.36, 1); }
+
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(56px) scale(0.97);
+    transition: opacity 900ms var(--ease-out), transform 900ms cubic-bezier(0.22, 1.4, 0.36, 1);
+    will-change: opacity, transform;
+  }
+  [data-reveal].is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  [data-reveal="fade"] { transform: translateY(0) scale(1); }
+  [data-reveal="left"] { transform: translateX(-72px) scale(0.97); }
+  [data-reveal="left"].is-visible { transform: translateX(0) scale(1); }
+  [data-reveal="right"] { transform: translateX(72px) scale(0.97); }
+  [data-reveal="right"].is-visible { transform: translateX(0) scale(1); }
+  [data-reveal="scale"] { transform: scale(0.78); }
+  [data-reveal="scale"].is-visible { transform: scale(1); }
+  [data-reveal="up-big"] { transform: translateY(110px); }
+  [data-reveal="up-big"].is-visible { transform: translateY(0); }
+
+  @keyframes jkr-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-22px) rotate(-2deg); }
+  }
+  @keyframes jkr-glow-pulse {
+    0%, 100% { opacity: 0.45; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.22); }
+  }
+  @keyframes jkr-pop-in {
+    0% { opacity: 0; transform: scale(0.3) rotate(-8deg); }
+    55% { opacity: 1; transform: scale(1.25) rotate(4deg); }
+    75% { transform: scale(0.92) rotate(-2deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
+  }
+  @keyframes jkr-shine {
+    0% { transform: translateX(-150%) skewX(-12deg); }
+    100% { transform: translateX(260%) skewX(-12deg); }
+  }
+  @keyframes jkr-grid-drift {
+    0% { background-position: 0 0; }
+    100% { background-position: 96px 96px; }
+  }
+  @keyframes jkr-word-in {
+    0% { opacity: 0; transform: translateY(0.5em) scale(0.9); }
+    100% { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .jkr-float { animation: jkr-float 4.5s var(--ease-in-out) infinite; }
+  .jkr-glow { animation: jkr-glow-pulse 4.2s var(--ease-in-out) infinite; }
+  .jkr-pop-in { animation: jkr-pop-in 700ms var(--jkr-overshoot) both; }
+  .jkr-grid-drift { animation: jkr-grid-drift 9s linear infinite; }
+
+  .jkr-word { display: inline-block; opacity: 0; animation: jkr-word-in 700ms var(--jkr-overshoot) both; }
+
+  .jkr-img-zoom { overflow: hidden; display: block; }
+  .jkr-img-zoom img {
+    transition: transform 700ms var(--jkr-overshoot), filter 700ms var(--ease-out);
+  }
+  .jkr-img-zoom:hover img { transform: scale(1.18) rotate(-1deg); filter: brightness(1.05); }
+
+  .jkr-shine-btn { position: relative; overflow: hidden; transition: transform 260ms var(--jkr-overshoot), box-shadow 260ms var(--ease-out); }
+  .jkr-shine-btn::after {
+    content: '';
+    position: absolute; top: 0; left: 0; bottom: 0; width: 45%;
+    background: linear-gradient(100deg, transparent, rgba(255,255,255,0.55), transparent);
+    transform: translateX(-150%) skewX(-12deg);
+    pointer-events: none;
+  }
+  .jkr-shine-btn:hover { transform: translateY(-4px) scale(1.03); box-shadow: var(--shadow-lg); }
+  .jkr-shine-btn:hover::after { animation: jkr-shine 750ms var(--ease-out); }
+
+  .jkr-tilt { transition: transform 220ms var(--ease-out); transform-style: preserve-3d; }
+
+  .jkr-card-pop { transition: transform 320ms var(--jkr-overshoot), box-shadow 320ms var(--ease-out) !important; }
+  .jkr-card-pop:hover { transform: translateY(-12px) scale(1.025) !important; box-shadow: var(--shadow-lg), 0 22px 46px rgba(10,14,20,0.18) !important; }
+
+  .jkr-header { transition: box-shadow 240ms var(--ease-out), background 240ms var(--ease-out), padding 240ms var(--ease-out); }
+  .jkr-header.is-scrolled { box-shadow: var(--shadow-lg); }
+
+  .jkr-underline { position: relative; }
+  .jkr-underline::after {
+    content: ''; position: absolute; left: 0; bottom: -2px; height: 2px; width: 0;
+    background: var(--accent-on-dark); transition: width 320ms var(--jkr-overshoot);
+  }
+  .jkr-underline:hover::after { width: 100%; }
+
+  .jkr-progress-track { position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 100; background: transparent; }
+  .jkr-progress-bar { height: 100%; width: 100%; background: var(--accent-on-dark); transform-origin: left; transform: scaleX(0); box-shadow: 0 0 12px rgba(227,85,80,0.6); }
+
+  .jkr-step-num {
+    transition: transform 320ms var(--jkr-overshoot), color 320ms var(--ease-out);
+  }
+  .jkr-step:hover .jkr-step-num { transform: scale(1.18) rotate(-4deg); color: var(--accent-on-dark); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+}

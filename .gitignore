@@ -1,0 +1,5 @@
+.claude/
+.qodo/
+.thumbnail
+Thumbs.db
+.DS_Store

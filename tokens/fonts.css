@@ -1,0 +1,7 @@
+/* JKR Engineering — Webfonts
+   Display + body: IBM Plex Sans (engineered, technical grotesque)
+   Mono / spec labels: IBM Plex Mono
+   Loaded from Google Fonts. If you want fully offline/self-hosted fonts,
+   replace this @import with local @font-face rules + bundled .woff2 files. */
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600;700&display=swap');

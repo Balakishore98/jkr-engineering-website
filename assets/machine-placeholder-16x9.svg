@@ -1,0 +1,13 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CNC shop floor photo placeholder">
+  <rect width="1200" height="675" fill="#10151d"></rect>
+  <g stroke="#1d2530" stroke-width="1">
+    <path d="M0 75h1200M0 150h1200M0 225h1200M0 300h1200M0 375h1200M0 450h1200M0 525h1200M0 600h1200"></path>
+    <path d="M75 0v675M150 0v675M225 0v675M300 0v675M375 0v675M450 0v675M525 0v675M600 0v675M675 0v675M750 0v675M825 0v675M900 0v675M975 0v675M1050 0v675M1125 0v675"></path>
+  </g>
+  <g stroke="#3d4b5c" stroke-width="1.5">
+    <path d="M600 307v60M570 337h60"></path>
+  </g>
+  <circle cx="600" cy="337" r="50" fill="none" stroke="#e08a16" stroke-width="2.5"></circle>
+  <text x="600" y="448" font-family="&#39;IBM Plex Mono&#39;,monospace" font-size="17" letter-spacing="4" text-anchor="middle" fill="#8190a1">SHOP FLOOR / HERO PHOTO</text>
+  <text x="600" y="474" font-family="&#39;IBM Plex Mono&#39;,monospace" font-size="13" letter-spacing="2" text-anchor="middle" fill="#5a6b7e">REPLACE WITH REAL IMAGE · 16:9</text>
+</svg>

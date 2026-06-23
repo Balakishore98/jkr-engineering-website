@@ -1,0 +1,18 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Amber Accent" subtitle="Heat & safety — the single brand accent" -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; background: var(--surface-card); padding: 22px 24px; font-family: var(--font-mono); }
+  .scale { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; }
+  .sw { height: 60px; border-radius: var(--radius-sm); border: 1px solid var(--hairline); }
+  .lab { font-size: 11px; letter-spacing: 0.06em; color: var(--text-faint); margin-top: 6px; text-align: center; }
+  .cell { display: flex; flex-direction: column; }
+  .star { color: var(--accent); }
+</style></head><body>
+  <div class="scale" id="s"></div>
+  <script>
+    const steps = [700,600,500,400,300,200,100];
+    document.getElementById('s').innerHTML = steps.map(n =>
+      `<div class="cell"><div class="sw" style="background:var(--amber-${n})"></div><div class="lab">${n}${n===500?' <span class=star>●</span>':''}</div></div>`).join('');
+  </script>
+</body></html>

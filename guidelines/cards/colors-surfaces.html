@@ -1,0 +1,26 @@
+<!-- @dsCard group="Colors" viewport="700x170" name="Surfaces & Text" subtitle="Light surfaces + dark industrial sections" -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; padding: 22px 24px; font-family: var(--font-sans); background: var(--bg-subtle); }
+  .row { display: flex; gap: 14px; }
+  .panel { flex: 1; border-radius: var(--radius-md); padding: 16px; border: 1px solid var(--border); }
+  .light { background: var(--surface-card); }
+  .dark { background: var(--bg-dark); border-color: var(--border-dark); }
+  .mono { font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; }
+  h4 { margin: 0 0 4px; font-family: var(--font-display); font-size: 18px; }
+  p { margin: 0 0 2px; font-size: 13px; }
+</style></head><body>
+  <div class="row">
+    <div class="panel light">
+      <h4 style="color:var(--text-strong)">Strong on light</h4>
+      <p style="color:var(--text-body)">Body text on white surface.</p>
+      <p class="mono" style="color:var(--text-muted)">--surface-card · --text-body</p>
+    </div>
+    <div class="panel dark">
+      <h4 style="color:var(--text-on-dark)">Strong on dark</h4>
+      <p style="color:var(--text-on-dark-muted)">Body text on steel-950.</p>
+      <p class="mono" style="color:var(--accent)">--bg-dark · --accent</p>
+    </div>
+  </div>
+</body></html>

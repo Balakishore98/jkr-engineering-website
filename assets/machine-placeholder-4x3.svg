@@ -1,0 +1,17 @@
+<svg width="800" height="600" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="CNC machine photo placeholder">
+  <rect width="800" height="600" fill="#161c26"></rect>
+  <rect x="0.5" y="0.5" width="799" height="599" fill="none" stroke="#2b3542"></rect>
+  
+  <g stroke="#222b38" stroke-width="1">
+    <path d="M0 100h800M0 200h800M0 300h800M0 400h800M0 500h800"></path>
+    <path d="M100 0v600M200 0v600M300 0v600M400 0v600M500 0v600M600 0v600M700 0v600"></path>
+  </g>
+  
+  <g stroke="#3d4b5c" stroke-width="1.5">
+    <path d="M400 270v60M370 300h60"></path>
+  </g>
+  <circle cx="400" cy="300" r="46" fill="none" stroke="#e08a16" stroke-width="2"></circle>
+  <path d="M400 254v-14M400 360v-14M346 300h-14M468 300h-14" stroke="#e08a16" stroke-width="2"></path>
+  <text x="400" y="406" font-family="&#39;IBM Plex Mono&#39;,monospace" font-size="15" letter-spacing="3" text-anchor="middle" fill="#8190a1">CNC MACHINE PHOTO</text>
+  <text x="400" y="430" font-family="&#39;IBM Plex Mono&#39;,monospace" font-size="12" letter-spacing="2" text-anchor="middle" fill="#5a6b7e">REPLACE WITH REAL IMAGE · 4:3</text>
+</svg>

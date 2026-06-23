@@ -1,0 +1,17 @@
+<!-- @dsCard group="Colors" viewport="700x150" name="Status Colors" subtitle="Green / red / blue — used sparingly" -->
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" />
+<link rel="stylesheet" href="../../styles.css" />
+<style>
+  body { margin: 0; background: var(--surface-card); padding: 22px 24px; font-family: var(--font-mono); }
+  .row { display: flex; gap: 14px; }
+  .item { flex: 1; }
+  .sw { height: 52px; border-radius: var(--radius-sm); display: flex; align-items: center; padding: 0 12px; color: #fff; font-size: 12px; letter-spacing: 0.06em; }
+  .soft { height: 24px; border-radius: 0 0 var(--radius-sm) var(--radius-sm); }
+  .lab { font-size: 11px; color: var(--text-faint); margin-top: 7px; }
+</style></head><body>
+  <div class="row">
+    <div class="item"><div class="sw" style="background:var(--green-500)">SUCCESS</div><div class="soft" style="background:var(--green-100)"></div><div class="lab">--green-500 / 100</div></div>
+    <div class="item"><div class="sw" style="background:var(--red-500)">DANGER</div><div class="soft" style="background:var(--red-100)"></div><div class="lab">--red-500 / 100</div></div>
+    <div class="item"><div class="sw" style="background:var(--blue-500)">INFO</div><div class="soft" style="background:var(--blue-100)"></div><div class="lab">--blue-500 / 100</div></div>
+  </div>
+</body></html>

@@ -1,0 +1,47 @@
+/* JKR Engineering — Spacing, radii, shadows, layout */
+
+:root {
+  /* ---- Spacing scale (4px base) ---- */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* ---- Corner radii — small, machined, not pill-soft ---- */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-xl: 16px;
+  --radius-pill: 999px;
+
+  /* ---- Border widths ---- */
+  --bw-hair: 1px;
+  --bw-thick: 2px;
+
+  /* ---- Shadows — crisp, low, technical (not soft glows) ---- */
+  --shadow-xs: 0 1px 2px rgba(10, 14, 20, 0.06);
+  --shadow-sm: 0 1px 3px rgba(10, 14, 20, 0.10), 0 1px 2px rgba(10, 14, 20, 0.06);
+  --shadow-md: 0 4px 14px rgba(10, 14, 20, 0.10);
+  --shadow-lg: 0 12px 32px rgba(10, 14, 20, 0.14);
+  --shadow-accent: 0 6px 20px rgba(127, 6, 6, 0.30);
+
+  /* ---- Layout ---- */
+  --container: 1200px; /* @kind spacing */
+  --container-narrow: 820px; /* @kind spacing */
+  --section-y: clamp(56px, 9vw, 112px); /* @kind spacing */
+
+  /* ---- Motion ---- */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.3, 1); /* @kind other */
+  --ease-in-out: cubic-bezier(0.6, 0, 0.2, 1); /* @kind other */
+  --dur-fast: 120ms; /* @kind other */
+  --dur: 200ms; /* @kind other */
+  --dur-slow: 360ms; /* @kind other */
+}

@@ -1,0 +1,79 @@
+/* JKR Engineering — Color tokens
+   Palette: "Machined steel + amber".
+   Cool steel neutrals (the metal) + an amber accent (heat / safety / brass). */
+
+:root {
+  /* ---- Steel neutrals (base scale) ---- */
+  --steel-950: #0a0e14;
+  --steel-900: #10151d;
+  --steel-850: #161c26;
+  --steel-800: #1d2530;
+  --steel-700: #2b3542;
+  --steel-600: #3d4b5c;
+  --steel-500: #5a6b7e;
+  --steel-400: #8190a1;
+  --steel-300: #aab6c3;
+  --steel-200: #cdd6de;
+  --steel-100: #e6ebef;
+  --steel-50:  #f4f7f9;
+  --white:     #ffffff;
+
+  /* ---- Maroon accent (base scale) — matches the real JKR logo mark.
+     Variable names kept as --amber-* so every consumer (components,
+     bundle, guideline docs) repaints without a project-wide rename. ---- */
+  --amber-700: #560404;
+  --amber-600: #6c0505;
+  --amber-500: #7f0606;  /* primary brand maroon — sampled from assets/jkr-logo.png */
+  --amber-400: #963333;
+  --amber-300: #b56f6f;
+  --amber-200: #d2a8a8;
+  --amber-100: #ecdada;
+
+  /* ---- Semantic status ---- */
+  --green-500:  #2f9e5e;
+  --green-100:  #dcf3e6;
+  --red-500:    #d8483f;
+  --red-100:    #fbe3e1;
+  --blue-500:   #2f6fb0;
+  --blue-100:   #dde9f5;
+
+  /* ================= Semantic aliases ================= */
+
+  /* Surfaces — light website */
+  --bg-base:        var(--steel-50);
+  --bg-subtle:      var(--steel-100);
+  --surface-card:   var(--white);
+  --surface-raised: var(--white);
+
+  /* Surfaces — dark industrial sections (hero, footer, CTA) */
+  --bg-dark:        var(--steel-950);
+  --bg-dark-2:      var(--steel-850);
+  --surface-dark:   var(--steel-800);
+
+  /* Text — on light */
+  --text-strong: var(--steel-900);
+  --text-body:   var(--steel-700);
+  --text-muted:  var(--steel-500);
+  --text-faint:  var(--steel-400);
+
+  /* Text — on dark */
+  --text-on-dark:        var(--steel-50);
+  --text-on-dark-muted:  var(--steel-300);
+  --text-on-dark-faint:  var(--steel-400);
+
+  /* Accent */
+  --accent:          var(--amber-500);
+  --accent-hover:    var(--amber-600);
+  --accent-soft:     var(--amber-100);
+  --accent-contrast: var(--steel-50); /* text/icon sitting on the maroon accent — needs to be light since maroon is dark */
+  --accent-on-dark:  #e35550; /* brighter tint of the brand maroon — for accent text/icons directly on dark surfaces, where the deep #7f0606 fails contrast */
+
+  /* Borders & lines */
+  --border:        var(--steel-200);
+  --border-strong: var(--steel-300);
+  --border-dark:   var(--steel-700);
+  --hairline:      rgba(10, 14, 20, 0.08);
+
+  /* Focus ring */
+  --focus-ring: rgba(127, 6, 6, 0.45);
+}
